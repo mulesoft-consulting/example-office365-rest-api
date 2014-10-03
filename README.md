@@ -95,7 +95,7 @@ Open the mule project located in /code
 
 So far, we have this information we got from Office 365 account and Azure subscription:
 - username
-- company__name
+- company_name
 - password
 - client_id
 - client_secret
