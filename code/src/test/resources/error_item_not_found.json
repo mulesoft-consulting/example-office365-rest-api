@@ -1,0 +1,11 @@
+{
+    "error": {
+        "code": "ErrorItemNotFound",
+        "message": "The specified object was not found in the store.",
+        "innererror": {
+            "message": "\"Exchange service returned error ErrorItemNotFound: The specified object was not found in the store.\".",
+            "type": "Microsoft.Exchange.Services.ExchangeService.ExchangeServiceErrorResponseException",
+            "stacktrace": "   at Microsoft.Exchange.Services.ExchangeService.ExchangeServiceHelper.CheckResponse(IExchangeWebMethodResponse response, ExecutionOption option)\r\n   at Microsoft.Exchange.Services.ExchangeService.ExchangeServiceBase.InvokeServiceCommand[TResponse](Func`1 commandCreator, ExecutionOption executionOption)\r\n   at Microsoft.Exchange.Services.OData.Model.ContactProvider.Update(String id, Contact changeEntity, String changeKey)\r\n   at Microsoft.Exchange.Services.OData.Model.UpdateContactCommand.InternalExecute()\r\n   at Microsoft.Exchange.Services.OData.ODataCommand`2.Execute()\r\n   at Microsoft.Exchange.Services.OData.ODataTask.Execute(TimeSpan queueAndDelayTime, TimeSpan totalTime)"
+        }
+    }
+}

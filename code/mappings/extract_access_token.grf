@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?><Graph __version="3.5.0" author="emmanuelteodoro" created="Fri Sep 26 16:32:26 ART 2014" description="Extract access token" guiVersion="3.4.4.P" id="1411785095542" licenseCode="Unlicensed" licenseType="Unknown" modified="Fri Sep 26 16:32:26 ART 2014" modifiedBy="emmanuelteodoro" name="Extract_access_token" preview-file="${Project_Home}/src/test/resources/access_token_response.json" revision="1.0" showComponentDetails="false">
+<Global>
+<Metadata __index="0" __referenceCounter="1" __sourcePath="{}/object" _dataStructure="OBJECT" _id="__id" _type="Input" id="6ee007b9-da51-4ae0-ad75-961e60a9f487">
+<Record fieldDelimiter="," name="object" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __index="0" __sourcePath="{}/object/token_x005ftype" containerType="SINGLE" label="token_type" name="token_type" type="string"/>
+<Field __index="1" __sourcePath="{}/object/expires_x005fin" containerType="SINGLE" label="expires_in" name="expires_in" type="string"/>
+<Field __index="2" __sourcePath="{}/object/expires_x005fon" containerType="SINGLE" label="expires_on" name="expires_on" type="string"/>
+<Field __index="3" __sourcePath="{}/object/not_x005fbefore" containerType="SINGLE" label="not_before" name="not_before" type="string"/>
+<Field __index="4" __sourcePath="{}/object/resource" containerType="SINGLE" label="resource" name="resource" type="string"/>
+<Field __index="5" __sourcePath="{}/object/access_x005ftoken" containerType="SINGLE" label="access_token" name="access_token" type="string"/>
+<Field __index="6" __sourcePath="{}/object/refresh_x005ftoken" containerType="SINGLE" label="refresh_token" name="refresh_token" type="string"/>
+<Field __index="7" __sourcePath="{}/object/scope" containerType="SINGLE" label="scope" name="scope" type="string"/>
+<Field __index="8" __sourcePath="{}/object/id_x005ftoken" containerType="SINGLE" label="id_token" name="id_token" type="string"/>
+<Field __index="9" __sourcePath="{}/object/pwd_x005fexp" containerType="SINGLE" label="pwd_exp" name="pwd_exp" type="string"/>
+<Field __index="10" __sourcePath="{}/object/pwd_x005furl" containerType="SINGLE" label="pwd_url" name="pwd_url" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="0" __referenceCounter="1" __sourcePath="{}/object" _dataStructure="OBJECT" _id="__id" _type="Output" id="45c97ea5-d5f4-4c42-bc5a-c019f25cb35b">
+<Record fieldDelimiter="," name="String" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __index="0" __sourcePath="{}/object/text()" containerType="SINGLE" label="text()" name="text" type="string"/>
+</Record>
+</Metadata>
+<Dictionary>
+<Entry id="DictionaryEntry0" input="true" name="inputPayload" output="false" type="object"/>
+<Entry id="DictionaryEntry1" input="false" name="outputPayload" output="true" type="object"/>
+</Dictionary>
+</Global>
+<Phase number="0">
+<Node cacheInMemory="true" enabled="enabled" fileURL="dict:outputPayload" guiName="Pojo WRITER" guiX="900" guiY="20" id="BEAN_WRITER0" type="BEAN_WRITER">
+<attr name="mapping"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<object xmlns:clover="http://www.cloveretl.com/ns/xmlmapping" clover:inPort="0">$0.text</object>]]></attr>
+<attr name="_data_format"><![CDATA[JAVA]]></attr>
+<attr name="schema"><![CDATA[<?xml version="1.0" encoding="UTF-8"?><schema-object>
+  <typed-object-ref type-ref="java.lang.String"/>
+  <typed-object type="java.lang.String"/>
+</schema-object>
+]]></attr>
+</Node>
+<Node enabled="enabled" guiName="Foreach 'object' -&gt; 'object'" guiX="460" guiY="20" id="FOREACH_OBJECT_OBJECT" transformClass="com.mulesoft.datamapper.transform.MelRecordTransform" type="REFORMAT">
+<attr name="melScript"><![CDATA[//MEL
+//START -> DO NOT REMOVE
+output.__id = input.__id;
+//END -> DO NOT REMOVE
+output.text = input.access_token;]]></attr>
+</Node>
+<Node charset="UTF-8" enabled="enabled" fileURL="dict:inputPayload" guiName="JSON READER" guiX="20" guiY="20" id="JSON_READER0" type="JSON_READER">
+<attr name="mapping"><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Context xpath="/root">
+  <Context outPort="0" sequenceField="__id" xpath="object">
+    <Mapping cloverField="token_type" trim="true" xpath="token_x005ftype"/>
+    <Mapping cloverField="expires_in" trim="true" xpath="expires_x005fin"/>
+    <Mapping cloverField="expires_on" trim="true" xpath="expires_x005fon"/>
+    <Mapping cloverField="not_before" trim="true" xpath="not_x005fbefore"/>
+    <Mapping cloverField="resource" trim="true" xpath="resource"/>
+    <Mapping cloverField="access_token" trim="true" xpath="access_x005ftoken"/>
+    <Mapping cloverField="refresh_token" trim="true" xpath="refresh_x005ftoken"/>
+    <Mapping cloverField="scope" trim="true" xpath="scope"/>
+    <Mapping cloverField="id_token" trim="true" xpath="id_x005ftoken"/>
+    <Mapping cloverField="pwd_exp" trim="true" xpath="pwd_x005fexp"/>
+    <Mapping cloverField="pwd_url" trim="true" xpath="pwd_x005furl"/>
+  </Context>
+</Context>
+]]></attr>
+<attr name="_data_format"><![CDATA[JSON]]></attr>
+<attr name="jsonSchemaURL"><![CDATA[./src/test/resources/access_token_response.json]]></attr>
+</Node>
+<Edge debugMode="true" fromNode="FOREACH_OBJECT_OBJECT:0" guiBendpoints="" id="Edge1" inPort="Port 0 (in)" metadata="45c97ea5-d5f4-4c42-bc5a-c019f25cb35b" outPort="Port 0 (out)" toNode="BEAN_WRITER0:0"/>
+<Edge debugMode="true" fromNode="JSON_READER0:0" guiBendpoints="" id="Edge0" inPort="Port 0 (in)" metadata="6ee007b9-da51-4ae0-ad75-961e60a9f487" outPort="Port 0 (out)" toNode="FOREACH_OBJECT_OBJECT:0"/>
+</Phase>
+</Graph>

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?><Graph __version="3.5.0" author="emmanuelteodoro" created="Fri Sep 26 16:32:26 ART 2014" description="JSON To JSON" guiVersion="3.4.4.P" id="1411785606560" licenseCode="Unlicensed" licenseType="Unknown" modified="Fri Sep 26 16:32:26 ART 2014" modifiedBy="emmanuelteodoro" name="JSON_To_JSON" preview-file="${Project_Home}/src/test/resources/office365/getcontacts_response.json" revision="1.0" showComponentDetails="false">
+<Global>
+<Metadata __index="0" __referenceCounter="1" __sourcePath="{}/array" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _type="Output" id="286b4aab-103d-4e4e-9966-6753fc1c05c7">
+<Record fieldDelimiter="," name="array" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __index="0" __sourcePath="{}/array/id" containerType="SINGLE" label="id" name="id" type="string"/>
+<Field __index="1" __sourcePath="{}/array/firstName" containerType="SINGLE" label="firstName" name="firstName" type="string"/>
+<Field __index="2" __sourcePath="{}/array/lastName" containerType="SINGLE" label="lastName" name="lastName" type="string"/>
+<Field __index="3" __sourcePath="{}/array/email" containerType="SINGLE" label="email" name="email" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="0" __referenceCounter="0" __sourcePath="{}/object" _dataStructure="OBJECT" _id="__id" _type="Input" id="86bb2c1d-92a4-4359-8586-7140a90f5572">
+<Record fieldDelimiter="," name="object" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __index="0" __sourcePath="{}/object/_x0040odata.context" containerType="SINGLE" label="@odata.context" name="odata_context" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="1" __referenceCounter="1" __sourcePath="{}/object/value" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="86bb2c1d-92a4-4359-8586-7140a90f5572" _parent_id="__parent_id" _type="Input" id="f1da717c-589d-4170-921e-8aa27e63598d">
+<Record fieldDelimiter="," name="value" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __index="1" __sourcePath="{}/object/value/_x0040odata.id" containerType="SINGLE" label="@odata.id" name="odata_id" type="string"/>
+<Field __index="2" __sourcePath="{}/object/value/_x0040odata.etag" containerType="SINGLE" label="@odata.etag" name="odata_etag" type="string"/>
+<Field __index="3" __sourcePath="{}/object/value/_x0040odata.editLink" containerType="SINGLE" label="@odata.editLink" name="odata_editLink" type="string"/>
+<Field __index="4" __sourcePath="{}/object/value/Id" containerType="SINGLE" label="Id" name="Id" type="string"/>
+<Field __index="5" __sourcePath="{}/object/value/ChangeKey" containerType="SINGLE" label="ChangeKey" name="ChangeKey" type="string"/>
+<Field __index="6" __sourcePath="{}/object/value/ClassName" containerType="SINGLE" label="ClassName" name="ClassName" type="string"/>
+<Field __index="7" __sourcePath="{}/object/value/Subject" containerType="SINGLE" label="Subject" name="Subject" type="string"/>
+<Field __index="8" __sourcePath="{}/object/value/BodyPreview" containerType="SINGLE" label="BodyPreview" name="BodyPreview" type="string"/>
+<Field __index="9" __sourcePath="{}/object/value/Body/ContentType" containerType="SINGLE" label="ContentType" name="ContentType" type="string"/>
+<Field __index="10" __sourcePath="{}/object/value/Body/Content" containerType="SINGLE" label="Content" name="Content" type="string"/>
+<Field __index="11" __sourcePath="{}/object/value/Importance" containerType="SINGLE" label="Importance" name="Importance" type="string"/>
+<Field __index="12" __sourcePath="{}/object/value/HasAttachments" containerType="SINGLE" label="HasAttachments" name="HasAttachments" type="boolean"/>
+<Field __index="13" __sourcePath="{}/object/value/ParentFolderId" containerType="SINGLE" label="ParentFolderId" name="ParentFolderId" type="string"/>
+<Field __index="14" __sourcePath="{}/object/value/FileAs" containerType="SINGLE" label="FileAs" name="FileAs" type="string"/>
+<Field __index="15" __sourcePath="{}/object/value/DisplayName" containerType="SINGLE" label="DisplayName" name="DisplayName" type="string"/>
+<Field __index="16" __sourcePath="{}/object/value/GivenName" containerType="SINGLE" label="GivenName" name="GivenName" type="string"/>
+<Field __index="17" __sourcePath="{}/object/value/Surname" containerType="SINGLE" label="Surname" name="Surname" type="string"/>
+<Field __index="18" __sourcePath="{}/object/value/EmailAddress1" containerType="SINGLE" label="EmailAddress1" name="EmailAddress1" type="string"/>
+<Field __index="19" __sourcePath="{}/object/value/DateTimeCreated" containerType="SINGLE" label="DateTimeCreated" name="DateTimeCreated" type="string"/>
+<Field __index="20" __sourcePath="{}/object/value/LastModifiedTime" containerType="SINGLE" label="LastModifiedTime" name="LastModifiedTime" type="string"/>
+<Field __index="21" __sourcePath="{}/object/value/Attachments_x0040odata.navigationLink" containerType="SINGLE" label="Attachments@odata.navigationLink" name="Attachments_odata_navigationLink" type="string"/>
+</Record>
+</Metadata>
+<Dictionary>
+<Entry id="DictionaryEntry0" input="true" name="inputPayload" output="false" type="object"/>
+<Entry id="DictionaryEntry1" input="false" name="outputPayload" output="true" type="object"/>
+</Dictionary>
+</Global>
+<Phase number="0">
+<Node enabled="enabled" guiName="Foreach 'value' -&gt; 'array'" guiX="460" guiY="120" id="FOREACH_VALUE_ARRAY" transformClass="com.mulesoft.datamapper.transform.MelRecordTransform" type="REFORMAT">
+<attr name="melScript"><![CDATA[//MEL
+//START -> DO NOT REMOVE
+output.__id = input.__id;
+//END -> DO NOT REMOVE
+output.id = input.Id;
+output.firstName = input.GivenName;
+output.lastName = input.Surname;
+output.email = input.EmailAddress1;]]></attr>
+</Node>
+<Node charset="UTF-8" enabled="enabled" fileURL="dict:inputPayload" guiName="JSON READER" guiX="20" guiY="20" id="JSON_READER0" type="JSON_READER">
+<attr name="mapping"><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Context xpath="/root">
+  <Context outPort="0" sequenceField="__id" xpath="object/value">
+    <Mapping cloverField="odata_id" trim="true" xpath="_x0040odata.id"/>
+    <Mapping cloverField="odata_etag" trim="true" xpath="_x0040odata.etag"/>
+    <Mapping cloverField="odata_editLink" trim="true" xpath="_x0040odata.editLink"/>
+    <Mapping cloverField="Id" trim="true" xpath="Id"/>
+    <Mapping cloverField="ChangeKey" trim="true" xpath="ChangeKey"/>
+    <Mapping cloverField="ClassName" trim="true" xpath="ClassName"/>
+    <Mapping cloverField="Subject" trim="true" xpath="Subject"/>
+    <Mapping cloverField="BodyPreview" trim="true" xpath="BodyPreview"/>
+    <Mapping cloverField="ContentType" trim="true" xpath="Body/ContentType"/>
+    <Mapping cloverField="Content" trim="true" xpath="Body/Content"/>
+    <Mapping cloverField="Importance" trim="true" xpath="Importance"/>
+    <Mapping cloverField="HasAttachments" trim="true" xpath="HasAttachments"/>
+    <Mapping cloverField="ParentFolderId" trim="true" xpath="ParentFolderId"/>
+    <Mapping cloverField="FileAs" trim="true" xpath="FileAs"/>
+    <Mapping cloverField="DisplayName" trim="true" xpath="DisplayName"/>
+    <Mapping cloverField="GivenName" trim="true" xpath="GivenName"/>
+    <Mapping cloverField="Surname" trim="true" xpath="Surname"/>
+    <Mapping cloverField="EmailAddress1" trim="true" xpath="EmailAddress1"/>
+    <Mapping cloverField="DateTimeCreated" trim="true" xpath="DateTimeCreated"/>
+    <Mapping cloverField="LastModifiedTime" trim="true" xpath="LastModifiedTime"/>
+    <Mapping cloverField="Attachments_odata_navigationLink" trim="true" xpath="Attachments_x0040odata.navigationLink"/>
+  </Context>
+</Context>
+]]></attr>
+<attr name="_data_format"><![CDATA[JSON]]></attr>
+<attr name="jsonSchemaURL"><![CDATA[./src/test/resources/office365/getcontacts_response.json]]></attr>
+</Node>
+<Node cacheInMemory="true" charset="UTF-8" enabled="enabled" fileURL="dict:outputPayload" guiName="JSON WRITER" guiX="900" guiY="20" id="JSON_WRITER0" type="JSON_WRITER">
+<attr name="mapping"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<clover:collection clover:name="array" xmlns:clover="http://www.cloveretl.com/ns/xmlmapping">
+  <item clover:inPort="0">
+    <id>$0.id</id>
+    <firstName>$0.firstName</firstName>
+    <lastName>$0.lastName</lastName>
+    <email>$0.email</email>
+  </item>
+</clover:collection>]]></attr>
+<attr name="_data_format"><![CDATA[JSON]]></attr>
+<attr name="jsonSchemaURL"><![CDATA[./src/main/api/contacts_res.json]]></attr>
+</Node>
+<Edge debugMode="true" fromNode="FOREACH_VALUE_ARRAY:0" guiBendpoints="" id="Edge3" inPort="Port 0 (in)" metadata="286b4aab-103d-4e4e-9966-6753fc1c05c7" outPort="Port 0 (out)" toNode="JSON_WRITER0:0"/>
+<Edge debugMode="true" fromNode="JSON_READER0:0" guiBendpoints="" id="Edge2" inPort="Port 0 (in)" metadata="f1da717c-589d-4170-921e-8aa27e63598d" outPort="Port 0 (out)" toNode="FOREACH_VALUE_ARRAY:0"/>
+</Phase>
+</Graph>

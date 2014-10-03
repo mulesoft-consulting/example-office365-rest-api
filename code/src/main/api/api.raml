@@ -1,0 +1,42 @@
+#%RAML 0.8
+baseUri: http://mocksvc.mulesoft.com/mocks/f9f1a87c-45dd-4fac-a82c-1b2ea606d812
+title: Office 365
+version: v1
+
+/contacts:
+  displayName: Contacts
+  get:
+    description: Get the list of existing contacts in Office365 account
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include contacts_res.json
+  post:
+    description: Creates a new contact
+    body:
+      application/json:
+        example: !include create_contact_req.json
+    responses:
+      200:
+        body:
+          application/json:
+           example: !include create_contact_res.json
+  patch:
+    description: Update an existing contact by email
+    body:
+      application/json:
+        example: !include update_contact_req.json
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include update_contact_res.json
+  /{id}:
+    delete:
+      description: Delete an existing contact by email
+      responses:
+        200:
+          body:
+            application/json:
+              example: !include delete_contact_res.json

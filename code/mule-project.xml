@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mule-project xmlns="http://www.mulesoft.com/tooling/project" runtimeId="org.mule.tooling.server.3.5.1.ee" schemaVersion="3.5.0.0">
+    <name>office365</name>
+    <description></description>
+    <muleExtension name="APIkit" qualifier="org.mule.tooling.apikit"/>
+    <muleExtension name="APIkit" qualifier="org.mule.tooling.apikit"/>
+    <muleExtension name="APIkit" qualifier="org.mule.tooling.apikit"/>
+    <muleExtension name="APIkit" qualifier="org.mule.tooling.apikit"/>
+    <muleExtension name="APIkit" qualifier="org.mule.tooling.apikit"/>
+    <muleExtension name="APIkit" qualifier="org.mule.tooling.apikit"/>
+    <muleExtension name="APIkit" qualifier="org.mule.tooling.apikit"/>
+    <muleExtension name="APIkit" qualifier="org.mule.tooling.apikit"/>
+    <muleExtension name="APIkit" qualifier="org.mule.tooling.apikit"/>
+    <muleExtension name="APIkit" qualifier="org.mule.tooling.apikit"/>
+    <muleExtension name="APIkit" qualifier="org.mule.tooling.apikit"/>
+</mule-project>

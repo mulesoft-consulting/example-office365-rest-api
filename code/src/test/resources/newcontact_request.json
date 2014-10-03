@@ -1,0 +1,6 @@
+{
+  "@odata.type": "#Microsoft.Exchange.Services.OData.Model.Contact",
+  "GivenName": "1Mara",
+  "Surname": "1Whitley",
+  "EmailAddress1": "mara@fabrikam.com"
+}

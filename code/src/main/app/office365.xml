@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns:json="http://www.mulesoft.org/schema/mule/json"
+	xmlns:data-mapper="http://www.mulesoft.org/schema/mule/ee/data-mapper"
+	xmlns:https="http://www.mulesoft.org/schema/mule/https" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" version="EE-3.5.1"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/https http://www.mulesoft.org/schema/mule/https/current/mule-https.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
+http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schema/mule/ee/data-mapper/current/mule-data-mapper.xsd
+http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd">
+	<data-mapper:config name="Extract_access_token"
+		transformationGraphPath="extract_access_token.grf" doc:name="Extract_access_token" />
+	<data-mapper:config name="JSON_To_JSON"
+		transformationGraphPath="json_to_json.grf" doc:name="JSON_To_JSON" />
+	<data-mapper:config name="JSON_To_JSON_1"
+		transformationGraphPath="json_to_json_1.grf" doc:name="JSON_To_JSON_1" />
+	<data-mapper:config name="JSON_To_JSON_1JSON_To_JSON_2"
+		transformationGraphPath="json_to_json_2.grf" doc:name="JSON_To_JSON_1JSON_To_JSON_2" />
+	<data-mapper:config name="JSON_To_JSON_1JSON_To_JSON_2JSON_To_JSON_3"
+		transformationGraphPath="json_to_json_3.grf" doc:name="JSON_To_JSON_1JSON_To_JSON_2JSON_To_JSON_3" />
+	<flow name="get-contacts" doc:name="get-contacts">
+		<flow-ref name="set-access-token" doc:name="Get access token" />
+		<https:outbound-endpoint exchange-pattern="request-response"
+			method="GET" address="${office365.contacts.url}" doc:name="Get contacts from Office365">
+			<message-properties-transformer>
+				<add-message-property key="Content-Type" value="application/json" />
+				<add-message-property key="client-request-id"
+					value="${office365.client_id}" />
+				<add-message-property key="return-client-request-id"
+					value="true" />
+				<add-message-property key="authorization"
+					value="#['Bearer ' + flowVars['access_token']]" />
+			</message-properties-transformer>
+		</https:outbound-endpoint>
+		<data-mapper:transform config-ref="JSON_To_JSON"
+			doc:name="Office365 JSON To API JSON" />
+	</flow>
+	<flow name="create-contact" doc:name="create-contact">
+		<flow-ref name="set-access-token" doc:name="Get access token" />
+		<data-mapper:transform config-ref="JSON_To_JSON_1"
+			doc:name="API JSON To Office365 JSON" />
+		<https:outbound-endpoint exchange-pattern="request-response"
+			method="POST" address="${office365.contacts.url}" doc:name="Create contact in Office365">
+			<message-properties-transformer>
+				<add-message-property key="Content-Type" value="application/json" />
+				<add-message-property key="client-request-id"
+					value="${office365.client_id}" />
+				<add-message-property key="return-client-request-id"
+					value="true" />
+				<add-message-property key="authorization"
+					value="#['Bearer ' + flowVars['access_token']]" />
+			</message-properties-transformer>
+		</https:outbound-endpoint>
+		<data-mapper:transform config-ref="JSON_To_JSON_1JSON_To_JSON_2"
+			doc:name="Office365 JSON To API JSON" />
+	</flow>
+	<flow name="update-contact" doc:name="update-contact">
+		<flow-ref name="set-access-token" doc:name="Get access token" />
+		<set-variable variableName="itemId" value="#[json:id]"
+			doc:name="Set item id" />
+		<data-mapper:transform config-ref="JSON_To_JSON_1JSON_To_JSON_2JSON_To_JSON_3"
+			doc:name="API JSON To Office365 JSON" />
+		<https:outbound-endpoint exchange-pattern="request-response"
+			method="PATCH" address="${office365.contacts.url}('#[itemId]')"
+			doc:name="Update contact in Office365">
+			<message-properties-transformer>
+				<add-message-property key="Content-Type" value="application/json" />
+				<add-message-property key="client-request-id"
+					value="${office365.client_id}" />
+				<add-message-property key="return-client-request-id"
+					value="true" />
+				<add-message-property key="authorization"
+					value="#['Bearer ' + flowVars['access_token']]" />
+			</message-properties-transformer>
+		</https:outbound-endpoint>
+        <set-payload value="{ 'message' : 'Contact updated'}" doc:name="Set response"/>
+	</flow>
+	<flow name="set-access-token" doc:name="set-access-token">
+		<enricher source="#[payload]" target="#[flowVars['access_token']]"
+			doc:name="Message Enricher">
+			<flow-ref name="get-access-token" doc:name="Get access token" />
+		</enricher>
+	</flow>
+	<sub-flow name="get-access-token" doc:name="get-access-token">
+		<set-payload
+			value="#[['resource':'${azure.login.resource}','client_id':'${office365.client_id}','client_secret':'${office365.client_secret}','grant_type':'password','username':'${azure.login.username}','password':'${azure.login.password}','scope':'openid']]"
+			doc:name="Set request access token" />
+		<https:outbound-endpoint exchange-pattern="request-response"
+			method="POST"
+			address="https://login.windows.net/demomule.onmicrosoft.com/oauth2/token"
+			doc:name="Get access token from azure AD">
+			<message-properties-transformer>
+				<add-message-property key="Content-Type"
+					value="application/x-www-form-urlencoded" />
+			</message-properties-transformer>
+		</https:outbound-endpoint>
+		<data-mapper:transform config-ref="Extract_access_token"
+			doc:name="Extract access token" />
+		<logger message="access_token=#[payload]" level="INFO"
+			doc:name="Logger" />
+	</sub-flow>
+	<flow name="delete-contact" doc:name="delete-contact">
+		<flow-ref name="set-access-token" doc:name="Get access token" />
+		<https:outbound-endpoint exchange-pattern="request-response"
+			address="${office365.contacts.url}('#[id]')" doc:name="Delete contact in Office365"
+			method="DELETE">
+			<message-properties-transformer>
+				<add-message-property key="Content-Type" value="application/json" />
+				<add-message-property key="client-request-id"
+					value="${office365.client_id}" />
+				<add-message-property key="return-client-request-id"
+					value="true" />
+				<add-message-property key="authorization"
+					value="#['Bearer ' + flowVars['access_token']]" />
+			</message-properties-transformer>
+		</https:outbound-endpoint>
+		<set-payload
+			value="{ 'message' : 'Contact deleted'}"
+			doc:name="Set response" />
+	</flow>
+</mule>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?><Graph __version="3.5.0" author="emmanuelteodoro" created="Wed Oct 01 20:57:15 ART 2014" description="JSON To JSON" guiVersion="3.4.4.P" id="1412218332060" licenseCode="Unlicensed" licenseType="Unknown" modified="Wed Oct 01 20:57:15 ART 2014" modifiedBy="emmanuelteodoro" name="JSON_To_JSON_1JSON_To_JSON_2JSON_To_JSON_3" preview-file="${Project_Home}/src/main/api/update_contact_req.json" revision="1.0" showComponentDetails="false">
+<Global>
+<Metadata __index="0" __referenceCounter="1" __sourcePath="{}/object" _dataStructure="OBJECT" _id="__id" _type="Output" id="965d6c3a-0ea0-4eb2-8c3a-fe47f896ba99">
+<Record fieldDelimiter="," name="object" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __index="0" __sourcePath="{}/object/GivenName" containerType="SINGLE" label="GivenName" name="GivenName" type="string"/>
+<Field __index="1" __sourcePath="{}/object/Surname" containerType="SINGLE" label="Surname" name="Surname" type="string"/>
+<Field __index="2" __sourcePath="{}/object/EmailAddress1" containerType="SINGLE" label="EmailAddress1" name="EmailAddress1" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="0" __referenceCounter="1" __sourcePath="{}/object" _dataStructure="OBJECT" _id="__id" _type="Input" id="a304d552-4c64-41e9-86ff-473412043e97">
+<Record fieldDelimiter="," name="object" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __index="0" __sourcePath="{}/object/id" containerType="SINGLE" label="id" name="id" type="string"/>
+<Field __index="1" __sourcePath="{}/object/firstName" containerType="SINGLE" label="firstName" name="firstName" type="string"/>
+<Field __index="2" __sourcePath="{}/object/lastName" containerType="SINGLE" label="lastName" name="lastName" type="string"/>
+<Field __index="3" __sourcePath="{}/object/email" containerType="SINGLE" label="email" name="email" type="string"/>
+</Record>
+</Metadata>
+<Dictionary>
+<Entry id="DictionaryEntry0" input="true" name="inputPayload" output="false" type="object"/>
+<Entry id="DictionaryEntry1" input="false" name="outputPayload" output="true" type="object"/>
+</Dictionary>
+</Global>
+<Phase number="0">
+<Node enabled="enabled" guiName="Foreach 'object' -&gt; 'object'" guiX="460" guiY="20" id="FOREACH_OBJECT_OBJECT" transformClass="com.mulesoft.datamapper.transform.MelRecordTransform" type="REFORMAT">
+<attr name="melScript"><![CDATA[//MEL
+//START -> DO NOT REMOVE
+output.__id = input.__id;
+//END -> DO NOT REMOVE
+output.GivenName = input.firstName;
+output.Surname = input.lastName;
+output.EmailAddress1 = input.email;]]></attr>
+</Node>
+<Node charset="UTF-8" enabled="enabled" fileURL="dict:inputPayload" guiName="JSON READER" guiX="20" guiY="20" id="JSON_READER0" type="JSON_READER">
+<attr name="mapping"><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Context xpath="/root">
+  <Context outPort="0" sequenceField="__id" xpath="object">
+    <Mapping cloverField="id" trim="true" xpath="id"/>
+    <Mapping cloverField="firstName" trim="true" xpath="firstName"/>
+    <Mapping cloverField="lastName" trim="true" xpath="lastName"/>
+    <Mapping cloverField="email" trim="true" xpath="email"/>
+  </Context>
+</Context>
+]]></attr>
+<attr name="_data_format"><![CDATA[JSON]]></attr>
+<attr name="jsonSchemaURL"><![CDATA[./src/main/api/update_contact_req.json]]></attr>
+</Node>
+<Node cacheInMemory="true" charset="UTF-8" enabled="enabled" fileURL="dict:outputPayload" guiName="JSON WRITER" guiX="900" guiY="20" id="JSON_WRITER0" type="JSON_WRITER">
+<attr name="mapping"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<object xmlns:clover="http://www.cloveretl.com/ns/xmlmapping" clover:inPort="0">
+  <GivenName>$0.GivenName</GivenName>
+  <Surname>$0.Surname</Surname>
+  <EmailAddress1>$0.EmailAddress1</EmailAddress1>
+</object>]]></attr>
+<attr name="_data_format"><![CDATA[JSON]]></attr>
+<attr name="jsonSchemaURL"><![CDATA[./src/test/resources/office365/update_contact_req.json]]></attr>
+</Node>
+<Edge debugMode="true" fromNode="FOREACH_OBJECT_OBJECT:0" guiBendpoints="" id="Edge1" inPort="Port 0 (in)" metadata="965d6c3a-0ea0-4eb2-8c3a-fe47f896ba99" outPort="Port 0 (out)" toNode="JSON_WRITER0:0"/>
+<Edge debugMode="true" fromNode="JSON_READER0:0" guiBendpoints="" id="Edge0" inPort="Port 0 (in)" metadata="a304d552-4c64-41e9-86ff-473412043e97" outPort="Port 0 (out)" toNode="FOREACH_OBJECT_OBJECT:0"/>
+</Phase>
+</Graph>
