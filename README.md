@@ -117,9 +117,10 @@ There are three flows in the project:
 	- For each one, first we retrieve an access token which will give us authorization to interact with Office365 API. Specifically we are requesting access for the resource **https://outlook.office365.com**
 	- The we will send the access token in the header of each request for each operation.
 	- For the proposal of the demo we request the access token all the time, but you can store it and use it until it expires. That information comes from the access token request.
+	
+**Note**: The Office365.xml has an error because we are using in a http outbound the http method "PATCH". Ignore it.
 
 ## Notes
 
 - This example was built without any extra connector more than Http, so you don't need to install anything extra
 - This was tested on Mule ESB 3.5.1 and Cloudhub
-- The Office365 has an error because we are using in a http outbound the http method "PATCH". Ignore it.
