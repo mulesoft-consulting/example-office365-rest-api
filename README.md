@@ -1,4 +1,4 @@
-# Example: Starting with Office365 
+# Example: Office365 REST API
 
 ## Content
 
