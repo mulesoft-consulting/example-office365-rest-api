@@ -1,6 +1,19 @@
-#
-Example: Starting with Office365 
+# Example: Starting with Office365 
 
+## Content
+
++ [Summary](#Summary)
++ [About the example](#About the example)
++ [Demo environment configuration](#Demo environment configuration)
+	* [Set up your Office 365 APIs Preview development environment](#Set up your Office 365 APIs Preview development environment)
+		* [Get Office 365 developer site ](#Get Office 365 developer site)
+		* [Set up azure subscription ](#Set up azure subscription)
+	* [Configure Mule project ](#Configure Mule project)		
+* [Run it](#Run it)		
+* [Technical dives](#Technical dives)		
+* [Notes](#Notes)		
+		
+		
 ## Summary
 This is an example that shows how to interact with **Office365** using the **official REST Api**.
 
@@ -74,7 +87,7 @@ Next step to configure the application:
 3. Save the changes
 4. Copy the client_id which we will need later.
 5. In **keys** section select duration 1 year and save the changes
-6. It will appear the client_secret similar to this: cO+J+a2CMv19VulYxOCRvaUktAwXzaIKEgdSgIcirKA=, copy it.
+6. It will appear the client_secret, copy it.
 
 
 ### Configure Mule project
@@ -110,4 +123,3 @@ There are three flows in the project:
 - This example was built without any extra connector more than Http, so you don't need to install anything extra
 - This was tested on Mule ESB 3.5.1 and Cloudhub
 - The Office365 has an error because we are using in a http outbound the http method "PATCH". Ignore it.
-
