@@ -2,16 +2,16 @@
 
 ## Content
 
-+ [Summary](#Summary)
-+ [About the example](#About the example)
-+ [Demo environment configuration](#Demo environment configuration)
-	* [Set up your Office 365 APIs Preview development environment](#Set up your Office 365 APIs Preview development environment)
-		* [Get Office 365 developer site ](#Get Office 365 developer site)
-		* [Set up azure subscription ](#Set up azure subscription)
-	* [Configure Mule project ](#Configure Mule project)		
-* [Run it](#Run it)		
-* [Technical dives](#Technical dives)		
-* [Notes](#Notes)		
++ [Summary](#summary)
++ [About the example](#about-the-example)
++ [Demo environment configuration](#demo-environment-configuration)
+	* [Set up your Office 365 APIs Preview development environment](#set-up–your–office-365-apis-preview-development-environment)
+		* [Get Office 365 developer site ](#get-office-365-developer-site)
+		* [Set up azure subscription ](#set-up-azure-subscription)
+	* [Configure Mule project ](#configure-mule project)		
+* [Run it](#run-it)		
+* [Technical dives](#technical-dives)		
+* [Notes](#notes)		
 		
 		
 ## Summary
